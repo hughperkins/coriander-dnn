@@ -26,9 +26,13 @@ target_include_directories(corianderdnn PRIVATE "include")
 target_include_directories(corianderdnn SYSTEM BEFORE PRIVATE "/usr/local/include/clew/proxy-headers")
 target_include_directories(corianderdnn PRIVATE ${CLANG_HOME}/include)
 
+INSTALL(FILES include/cudnn.h DESTINATION ${CORIANDER_DIR}/include/coriander_plugins/corianderdnn)
+FILE(GLOB DNN_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/coriander-dnn/*.h)
+INSTALL(FILES ${DNN_HEADERS} DESTINATION ${CORIANDER_DIR}/include/coriander_plugins/corianderdnn/coriander-dnn)
+
 install(TARGETS corianderdnn EXPORT corianderdnn-targets
-    LIBRARY DESTINATION coriander_plugins
-    ARCHIVE DESTINATION coriander_plugins
-    RUNTIME DESTINATION coriander_plugins
+    LIBRARY DESTINATION lib/coriander_plugins
+    ARCHIVE DESTINATION lib/coriander_plugins
+    RUNTIME DESTINATION lib/coriander_plugins
 )
 install(EXPORT corianderdnn-targets DESTINATION lib/corianderdnn)
