@@ -12,7 +12,8 @@ set(CMAKE_CXX_FLAGS "-std=c++11 -fPIC -g ${PLATFORM_OPTIONS}")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,$ORIGIN")
 add_definitions(-DUSE_CLEW)
 
-add_library(corianderdnn SHARED src/cocl_dnn.cpp src/cocl_dnn_act.cpp src/cocl_dnn_conv.cpp src/cocl_dnn_gemm.cpp src/cocl_dnn_pooling.cpp)
+add_library(corianderdnn SHARED src/cocl_dnn.cpp src/cocl_dnn_act.cpp src/cocl_dnn_conv.cpp src/cocl_dnn_gemm.cpp src/cocl_dnn_pooling.cpp
+    coriander_dnn_init.cpp)
 foreach(libname cocl clblast easycl clew)
     if(APPLE)
         target_link_libraries(corianderdnn "${CORIANDER_DIR}/lib/lib${libname}.dylib")
@@ -26,8 +27,8 @@ target_include_directories(corianderdnn SYSTEM BEFORE PRIVATE "/usr/local/includ
 target_include_directories(corianderdnn PRIVATE ${CLANG_HOME}/include)
 
 install(TARGETS corianderdnn EXPORT corianderdnn-targets
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION coriander_plugins
+    ARCHIVE DESTINATION coriander_plugins
+    RUNTIME DESTINATION coriander_plugins
 )
 install(EXPORT corianderdnn-targets DESTINATION lib/corianderdnn)
