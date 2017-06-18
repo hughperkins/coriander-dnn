@@ -24,3 +24,10 @@ target_include_directories(corianderdnn PRIVATE "${CORIANDER_DIR}/include")
 target_include_directories(corianderdnn PRIVATE "include")
 target_include_directories(corianderdnn SYSTEM BEFORE PRIVATE "/usr/local/include/clew/proxy-headers")
 target_include_directories(corianderdnn PRIVATE ${CLANG_HOME}/include)
+
+install(TARGETS corianderdnn EXPORT corianderdnn-targets
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+    RUNTIME DESTINATION bin
+)
+install(EXPORT corianderdnn-targets DESTINATION lib/corianderdnn)
