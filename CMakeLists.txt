@@ -14,8 +14,7 @@ set(CMAKE_CXX_FLAGS "-std=c++11 -fPIC -g ${PLATFORM_OPTIONS}")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,$ORIGIN")
 add_definitions(-DUSE_CLEW)
 
-add_library(corianderdnn SHARED src/cocl_dnn.cpp src/cocl_dnn_act.cpp src/cocl_dnn_conv.cpp src/cocl_dnn_gemm.cpp src/cocl_dnn_pooling.cpp
-    coriander_dnn_init.cpp)
+add_library(corianderdnn SHARED src/cocl_dnn.cpp src/cocl_dnn_act.cpp src/cocl_dnn_conv.cpp src/cocl_dnn_gemm.cpp src/cocl_dnn_pooling.cpp)
 foreach(libname cocl clblast easycl clew)
     if(APPLE)
         target_link_libraries(corianderdnn "${CORIANDER_DIR}/lib/lib${libname}.dylib")
