@@ -35,4 +35,4 @@ install(TARGETS corianderdnn EXPORT corianderdnn-targets
     ARCHIVE DESTINATION lib/coriander_plugins
     RUNTIME DESTINATION lib/coriander_plugins
 )
-install(EXPORT corianderdnn-targets DESTINATION lib/corianderdnn)
+# install(EXPORT corianderdnn-targets DESTINATION lib/corianderdnn)
