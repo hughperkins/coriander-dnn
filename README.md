@@ -26,7 +26,7 @@ cocl_py --clang-home /usr/local/opt/llvm-4.0 basic1.cu
 
 ### Unit tests
 
-There are unit tests in [test/gtest].  You can build them:
+There are unit tests in [test/gtest](test/gtest).  You can build them:
 ```
 make -j 8 tests
 ```
