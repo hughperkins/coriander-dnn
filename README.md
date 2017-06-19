@@ -28,6 +28,17 @@ cocl_py --clang-home /usr/local/opt/llvm-4.0 basic1.cu
 # hopefully will print the model of your gpu at least
 ```
 
+### Unit tests
+
+There are unit tests in [test/gtest].  You can build them:
+```
+make -j 8 tests
+```
+And run them:
+```
+make run-tests
+```
+
 ### cudnn test
 
 This test uses the cudnn code at https://github.com/tbennun/cudnn-training to test that we can run convolutions and so on.  I modified

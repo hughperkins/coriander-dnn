@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "cocl/cocl_dnn_pooling.h"
-#include "cocl/cocl_dnn.h"
+#include "coriander-dnn/cocl_dnn_pooling.h"
+#include "coriander-dnn/cocl_dnn.h"
 #include "cocl/cocl.h"
 #include "EasyCL/EasyCL.h"
 #include "EasyCL/util/easycl_stringhelper.h"

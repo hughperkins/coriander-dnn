@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.0.0)
 
+option(BUILD_TESTS OFF)
+
 if(WIN32)
     set(CORIANDER_DIR "C:\\Program Files\\Coriander" CACHE PATH "Installation directory of Coriander")
     set(CLANG_HOME "C:\\Program Files\\LLVM" CACHE PATH "the downloaded clang-4.0.0 folder, containing lib, bin etc")
@@ -25,6 +27,9 @@ target_include_directories(corianderdnn PRIVATE "${CORIANDER_DIR}/include")
 target_include_directories(corianderdnn PRIVATE "include")
 target_include_directories(corianderdnn SYSTEM BEFORE PRIVATE "/usr/local/include/clew/proxy-headers")
 target_include_directories(corianderdnn PRIVATE ${CLANG_HOME}/include)
+
+# include(test/CMakeLists.txt)
+add_subdirectory(test)
 
 INSTALL(FILES include/cudnn.h DESTINATION ${CORIANDER_DIR}/include/coriander_plugins/corianderdnn)
 FILE(GLOB DNN_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/coriander-dnn/*.h)
