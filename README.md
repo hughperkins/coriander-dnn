@@ -1,7 +1,6 @@
 # coriander-dnn
-DNN API for Coriander
 
-This repo provides a partial implementation of cuDNN API
+Coriander-dnn provides a partial implementation of the NVIDIA® CUDA™ cuDNN API, for Coriander, OpenCL 1.2
 
 ## Installation
 
