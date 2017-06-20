@@ -64,8 +64,8 @@ FILE(GLOB DNN_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/coriander-dnn/*.h)
 INSTALL(FILES ${DNN_HEADERS} DESTINATION ${CORIANDER_DIR}/include/coriander_plugins/corianderdnn/coriander-dnn)
 
 install(TARGETS corianderdnn EXPORT corianderdnn-targets
-    LIBRARY DESTINATION lib/coriander_plugins
-    ARCHIVE DESTINATION lib/coriander_plugins
-    RUNTIME DESTINATION lib/coriander_plugins
+    LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/coriander_plugins
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/coriander_plugins
+    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/coriander_plugins
 )
-install(EXPORT corianderdnn-targets DESTINATION lib/coriander_plugins)
+install(EXPORT corianderdnn-targets DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/coriander_plugins)

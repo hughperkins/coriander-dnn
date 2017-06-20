@@ -1,1 +1,1 @@
-set(Coriander_LIBRARIES "${Coriander_LIBRARIES};")
+set(Coriander_LIBRARIES "${Coriander_LIBRARIES};%CMAKE_INSTALL_PREFIX%/lib/coriander_plugins/libcorianderdnn.@LIB_SUFFIX@")
