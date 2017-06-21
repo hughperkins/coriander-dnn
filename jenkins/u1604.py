@@ -33,6 +33,14 @@ def mkdir(subdir):
         os.makedirs(full_path)
 
 
+def wget(target_url):
+    run(['wget', target_url])
+
+
+def gunzip(target):
+    run(['gunzip', target])
+
+
 def run(cmdlist):
     global recursion_level
     print(' '.join(cmdlist))
@@ -134,6 +142,16 @@ def main(git_branch):
     cd('build)')
     run(['cmake', '..'])
     run(['cmake', '--build', '.'])
+
+    wget('http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz')
+    wget('wget http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz')
+    wget('wget http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz')
+    wget('wget http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz')
+    gunzip('train-images-idx3-ubyte.gz')
+    gunzip('train-labels-idx1-ubyte.gz')
+    gunzip('t10k-images-idx3-ubyte.gz')
+    gunzip('t10k-labels-idx1-ubyte.gz')
+
     run_until(['./lenet'], until='Training iter 2')
 
 
