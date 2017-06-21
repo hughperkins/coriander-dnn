@@ -45,6 +45,9 @@ target_include_directories(corianderdnn SYSTEM BEFORE PRIVATE "${CORIANDER_DIR}/
 target_include_directories(corianderdnn PRIVATE ${CLANG_HOME}/include)
 target_link_libraries(corianderdnn cocl clblast easycl clew)
 
+# for testing
+set(CORIANDERDNN_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(GTEST_HOME ${CMAKE_CURRENT_SOURCE_DIR}/third_party/gtest)
 add_subdirectory(test)
 
 CONFIGURE_FILE(
