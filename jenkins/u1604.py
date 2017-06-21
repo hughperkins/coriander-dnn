@@ -174,7 +174,7 @@ def main(git_branch):
     mkdir('build')
     cd('build')
     activate(join(coriander_dir, 'activate'))
-    run(['cmake', '..', '-DUSE_CUDA=OFF', '-DUSE_CUDA=ON'])
+    run(['cmake', '..', '-DUSE_CUDA=OFF', '-DUSE_OPENCL=ON'])
     run(['cmake', '--build', '.'])
 
     wget('http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz')
