@@ -131,7 +131,7 @@ def main(git_branch):
     clean_coriander()
 
     coriander_dir = join(os.environ['HOME'], 'coriander')
-    run(['git', 'clone', '--recursive', 'https://github.com/hughperkins/coriander', '-b', git_branch], 'coriander_repo')
+    run(['git', 'clone', '--recursive', 'https://github.com/hughperkins/coriander', '-b', git_branch, 'coriander_repo'])
     cd('coriander_repo')
     run(['python2', 'install_distro.py', '--git-branch', git_branch])
 
