@@ -17,13 +17,9 @@ add_executable(gtest-tests ${TESTS_EXCLUDE} gtest/gtest_main.cpp gtest/GtestGlob
     gtest/test_dnn_conv.cpp gtest/test_dnn_act.cpp gtest/test_dnn_loss.cpp
     gtest/test_dnn_pooling.cpp
 )
-# target_include_directories(gtest-tests PRIVATE src)
 target_include_directories(gtest-tests PRIVATE ../include)
-# target_include_directories(gtest-tests PRIVATE src/EasyCL/thirdparty/clew/include)
 target_include_directories(gtest-tests PRIVATE ../third_party/gtest)
-# target_include_directories(gtest-tests PRIVATE ${CLANG_HOME}/include)
 target_link_libraries(gtest-tests corianderdnn_gtest easycl)
-# target_compile_options(gtest-tests PRIVATE ${LLVM_CXXFLAGS} ${LLVM_DEFINES})
 target_link_libraries(gtest-tests corianderdnn)
 
 add_custom_target(run-gtest-tests
