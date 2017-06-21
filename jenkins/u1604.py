@@ -142,6 +142,22 @@ def run_script(script):
         run(['bash', tmp_name])
 
 
+def activate(activate_file):
+    with open(activate_file) as f:
+        contents = f.read()
+    for line in contents.split('\n'):
+        line = line.strip().replace('export ', '')
+        if line == '':
+            continue
+        var = line.split('=')[0].strip()
+        value = line.split('=')[1].strip().replace('$PATH', os.environ['PATH'])
+        if value.startswith('"'):
+            value = value[1:]
+        if value.endswith('"'):
+            value = value[:-1]
+        os.environ[var] = value
+
+
 def main(git_branch):
     # BASEDIR = os.getcwd()
 
@@ -157,16 +173,8 @@ def main(git_branch):
     cd('cudnn-training')
     mkdir('build')
     cd('build')
-    if platform.uname()[0] == 'Windows':
-        run_script("""
-call $HOME\coriander\activate
-cmake .. -DUSE_CUDA=OFF -DUSE_OPENCL=ON
-""")
-    else:
-        run_script("""
-source ~/coriander/activate
-cmake .. -DUSE_CUDA=OFF -DUSE_OPENCL=ON
-""")
+    activate(join(coriander_dir, 'activate'))
+    run(['cmake', '..', '-DUSE_CUDA=OFF', '-DUSE_CUDA=ON'])
     run(['cmake', '--build', '.'])
 
     wget('http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz')
