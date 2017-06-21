@@ -32,3 +32,6 @@
 *.app
 
 build/
+
+coriander_repo/
+jenkins-out*.txt

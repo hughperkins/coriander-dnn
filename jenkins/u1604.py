@@ -19,6 +19,9 @@ def cd(subdir):
         current_dir = subdir
     else:
         current_dir = join(current_dir, subdir)
+    if not path.isdir(current_dir):
+        print('No such directory [%s]' % current_dir)
+        sys.exit(-1)
     print('cd to [%s]' % current_dir)
 
 
@@ -28,6 +31,7 @@ def cd_repo_root():
 
 
 def mkdir(subdir):
+    global current_dir
     full_path = join(current_dir, subdir)
     if not path.isdir(full_path):
         os.makedirs(full_path)
@@ -42,7 +46,7 @@ def gunzip(target):
 
 
 def run(cmdlist):
-    global recursion_level
+    global current_dir
     print(' '.join(cmdlist))
     f_out = open('jenkins-out%s.txt', 'w', buffering=1)
     f_in = open('jenkins-out%s.txt', 'r', buffering=1)
@@ -78,7 +82,7 @@ def run_until(cmdlist, until):
     Runs until string until appears in output, then kills the process, without
     checking return code, and returns the output so far
     """
-    global recursion_level
+    global current_dir
     print(' '.join(cmdlist))
     f_out = open('jenkins-out%s.txt', 'w', buffering=1)
     f_in = open('jenkins-out%s.txt', 'r', buffering=1)
