@@ -14,15 +14,14 @@ IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     endif()
 ENDIF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
-if(WIN32)
-    # set(CORIANDER_DIR "C:\\Program Files\\Coriander" CACHE PATH "Installation directory of Coriander")
-    set(CLANG_HOME "C:\\Program Files\\LLVM" CACHE PATH "the downloaded clang-4.0.0 folder, containing lib, bin etc")
-else()
-    set(CLANG_HOME "/usr/local/opt/llvm-4.0" CACHE PATH "the downloaded clang-4.0.0 folder, containing lib, bin etc")
-    # set(CORIANDER_DIR "$ENV{HOME}/coriander" CACHE PATH "Installation directory of Coriander")
-endif()
+# bring in just the targets we need/depend on
+# (if we bring in all targets, the dnn target has the same name as ourselves, and conflicts)
+include($ENV{COCL_CMAKE}/cocl_vars.cmake)
+include($ENV{COCL_CMAKE}/cocl_impl.cmake)
+include(${COCL_LIB}/cocl/cocl-targets.cmake)
+include(${COCL_LIB}/coriander_plugins/corianderclblast-targets.cmake)
+# include(${COCL_CMAKE}/coriander_plugins/corianderclblast.cmake)
 
-include($ENV{COCL_CMAKE}/cocl.cmake)
 set(CORIANDER_DIR ${CMAKE_INSTALL_PREFIX})
 
 SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib/coriander_plugins")
@@ -40,22 +39,12 @@ add_definitions(-DUSE_CLEW)
 add_library(corianderdnn SHARED
     src/cocl_dnn.cpp src/cocl_dnn_act.cpp src/cocl_dnn_conv.cpp
     src/cocl_dnn_gemm.cpp src/cocl_dnn_pooling.cpp)
-# foreach(libname cocl clblast easycl clew)
-#     if(APPLE)
-#         target_link_libraries(corianderdnn "${CORIANDER_DIR}/lib/lib${libname}.dylib")
-#     elseif(WIN32)
-#         target_link_libraries(corianderdnn "${CORIANDER_DIR}\\lib\\lib${libname}.lib")
-#     else()
-#         target_link_libraries(corianderdnn "${CORIANDER_DIR}/lib/lib${libname}.so")
-#     endif()
-# endforeach()
 target_include_directories(corianderdnn PRIVATE "${CORIANDER_DIR}/include")
 target_include_directories(corianderdnn PRIVATE "include")
 target_include_directories(corianderdnn SYSTEM BEFORE PRIVATE "${CORIANDER_DIR}/include/clew/proxy-headers")
 target_include_directories(corianderdnn PRIVATE ${CLANG_HOME}/include)
 target_link_libraries(corianderdnn cocl clblast easycl clew)
 
-# include(test/CMakeLists.txt)
 add_subdirectory(test)
 
 CONFIGURE_FILE(
