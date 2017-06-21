@@ -129,6 +129,19 @@ def clean_coriander():
     maybe_rmtree(coriander_dir)
 
 
+def run_script(script):
+    if platform.uname()[0] == 'Windows':
+        tmp_name = 'tmp_script.cmd'
+    else:
+        tmp_name = 'tmp_script.sh'
+    with open(tmp_name, 'w') as f:
+        f.write(script)
+    if platform.uname()[0] == 'Windows':
+        run(['cmd', '/c', tmp_name])
+    else:
+        run(['bash', tmp_name])
+
+
 def main(git_branch):
     # BASEDIR = os.getcwd()
 
@@ -144,7 +157,16 @@ def main(git_branch):
     cd('cudnn-training')
     mkdir('build')
     cd('build')
-    run(['cmake', '..'])
+    if platform.uname()[0] == 'Windows':
+        run_script("""
+call $HOME\coriander\activate
+cmake .. -DUSE_CUDA=OFF -DUSE_OPENCL=ON
+""")
+    else:
+        run_script("""
+source ~/coriander/activate
+cmake .. -DUSE_CUDA=OFF -DUSE_OPENCL=ON
+""")
     run(['cmake', '--build', '.'])
 
     wget('http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz')
