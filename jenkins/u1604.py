@@ -143,7 +143,7 @@ def main(git_branch):
     run(['git', 'clone', '--recursive', 'https://github.com/hughperkins/cudnn-training', '-b', git_branch])
     cd('cudnn-training')
     mkdir('build')
-    cd('build)')
+    cd('build')
     run(['cmake', '..'])
     run(['cmake', '--build', '.'])
 
