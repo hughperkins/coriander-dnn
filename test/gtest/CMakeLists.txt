@@ -2,10 +2,10 @@
 # via include(...)
 
 if(UNIX)
-    add_library(corianderdnn_gtest SHARED  ${TESTS_EXCLUDE} ${GTEST_HOME}/gtest-all.cc)
+    add_library(corianderdnn_gtest SHARED  ${TESTS_EXCLUDE} third_party/gtest/gtest-all.cc)
     target_link_libraries(corianderdnn_gtest pthread)
 else()
-    add_library(corianderdnn_gtest  ${TESTS_EXCLUDE} ${GTEST_HOME}/gtest-all.cc)
+    add_library(corianderdnn_gtest  ${TESTS_EXCLUDE} third_party/gtest/gtest-all.cc)
 endif()
 
 add_executable(gtest-tests ${TESTS_EXCLUDE} gtest_main.cpp GtestGlobals.cpp
@@ -13,10 +13,11 @@ add_executable(gtest-tests ${TESTS_EXCLUDE} gtest_main.cpp GtestGlobals.cpp
     test_dnn_pooling.cpp
 )
 target_include_directories(gtest-tests PRIVATE ${CORIANDERDNN_INCLUDE})
-target_include_directories(gtest-tests PRIVATE ${GTEST_HOME})
+target_include_directories(gtest-tests PRIVATE third_party/gtest)
 target_include_directories(gtest-tests PRIVATE ${COCL_INCLUDE})
 target_link_libraries(gtest-tests corianderdnn_gtest easycl)
 target_link_libraries(gtest-tests corianderdnn)
+# target_compile_options(gtest-tests PRIVATE -DUSE_CLEW)
 
 add_custom_target(run-gtest-tests
     COMMAND echo
