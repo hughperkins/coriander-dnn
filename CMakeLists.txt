@@ -42,6 +42,8 @@ add_library(corianderdnn SHARED
 target_include_directories(corianderdnn PRIVATE "${CORIANDER_DIR}/include")
 target_include_directories(corianderdnn PRIVATE "include")
 target_include_directories(corianderdnn SYSTEM BEFORE PRIVATE "${CORIANDER_DIR}/include/clew/proxy-headers")
+# I kind of want the dnn to be blas-agnostic, ie use any blas, but that's not the case currently
+target_include_directories(corianderdnn SYSTEM BEFORE PRIVATE "${CORIANDER_DIR}/include/coriander_plugins/corianderclblast")
 target_include_directories(corianderdnn PRIVATE ${CLANG_HOME}/include)
 target_link_libraries(corianderdnn cocl clblast easycl clew)
 
