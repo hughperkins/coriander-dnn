@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 4.0.0 FATAL_ERROR)
 
 # Originally designed to be run from the main CMakeLists.txt, in the root of the Coriander repo
 # via include(...)
